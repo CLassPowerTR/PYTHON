@@ -1,0 +1,385 @@
+from python_imagesearch.imagesearch import imagesearch
+import pyautogui
+import keyboard
+import time
+from tkinter import *
+import tkinter as tk
+import random
+
+
+pencere = Tk()
+pencere.geometry("360x360")
+pencere.title("Metin Botu 'By Batu'")
+
+
+
+def OtoAv():
+    if z.get() == 0:
+        print("İptal Edildi")
+        pass
+
+    if z.get() == 1:
+        bilgi = tk.Label(pencere, text="Oto Av Başladı")
+        bilgi.place(x=150, y=10)
+        time.sleep(3)
+        while True:
+            try:
+                ################ BOT KONTROL İÇİ ##################
+                """metin6 = imagesearch("Uriel.PNG")
+                if metin6[0] != -1:
+                    metin6_x = metin6[0]
+                    metin6_y = metin6[1]
+                    metin6_x = metin6_x+5
+                    metin6_y = metin6_y+5
+                    pyautogui.moveTo(metin6_x, metin6_y, 0.2)
+                    time.sleep(0.1)
+                    pyautogui.leftClick(metin6_x, metin6_y)
+                    continue
+
+                metin7 = imagesearch("Uriel1.PNG")
+                if metin7[0] != -1:
+                    metin7_x = metin6[0]
+                    metin7_y = metin6[1]
+                    metin7_x = metin7_x+5
+                    metin7_y = metin7_y+5
+                    pyautogui.moveTo(metin7_x, metin7_y, 0.2)
+                    time.sleep(0.1)
+                    pyautogui.leftClick(metin7_x, metin7_y)
+                    continue
+
+                metin7 = imagesearch("Uriel2.PNG")
+                if metin7[0] != -1:
+                    metin7_x = metin6[0]
+                    metin7_y = metin6[1]
+                    metin7_x = metin7_x+5
+                    metin7_y = metin7_y+5
+                    pyautogui.moveTo(metin7_x, metin7_y, 0.2)
+                    time.sleep(0.1)
+                    pyautogui.leftClick(metin7_x, metin7_y)
+                    continue
+
+                metin7 = imagesearch("Uriel3.PNG")
+                if metin7[0] != -1:
+                    metin7_x = metin6[0]
+                    metin7_y = metin6[1]
+                    metin7_x = metin7_x+5
+                    metin7_y = metin7_y+5
+                    pyautogui.moveTo ( metin7_x , metin7_y , 0.2 )
+                    time.sleep ( 0.1 )
+                    pyautogui.leftClick ( metin7_x , metin7_y )
+                    continue
+
+                metin7 = imagesearch("Uriel4.PNG")
+                if metin7[0] != -1 :
+                    metin7_x = metin6[0]
+                    metin7_y = metin6[1]
+                    metin7_x = metin7_x+5
+                    metin7_y = metin7_y+5
+                    pyautogui.moveTo ( metin7_x , metin7_y , 0.2 )
+                    time.sleep ( 0.1 )
+                    pyautogui.leftClick ( metin7_x , metin7_y )
+                    continue"""
+                    ################ SON ##################
+
+                ################ SUNUCUYA BAĞLANMAK İÇİN ##################
+                giris = imagesearch("tamam.PNG", precision=0.6)
+                if not giris[0] == -1:
+                    giris_x = giris[0]
+                    giris_y = giris[1]
+                    giris_x = giris_x+25
+                    giris_y = giris_y+15
+                    print("Oyundan Atmış, Oyuna Giriliyor...")
+                    time.sleep(1)
+                    pyautogui.moveTo(giris_x, giris_y, 0.2)
+                    time.sleep(0.1)
+                    pyautogui.leftClick(giris_x, giris_y)
+                    time.sleep(1)
+                    keyboard.press("F1")
+                    time.sleep(0.2)
+                    keyboard.release("F1")
+                    time.sleep(10)
+
+                giris1 = imagesearch("yamahabatu.PNG", precision=0.6)
+                if giris1[0] != -1:
+                    giris1_x = giris1[0]
+                    giris1_y = giris1[1]
+                    giris1_x = giris1_x+25
+                    giris1_y = giris1_y+15
+                    print("Oyundan Atmış, Oyuna Giriliyor...")
+                    time.sleep(1)
+                    pyautogui.moveTo(giris1_x , giris1_y , 0.2)
+                    time.sleep(0.1)
+                    pyautogui.leftClick(giris1_x , giris1_y)
+                    time.sleep(1)
+                    keyboard.press("F1")
+                    time.sleep(0.2)
+                    keyboard.release("F1")
+                    time.sleep(10)
+
+                ################ SUNUCUYA BAĞLANIRKEN SORUN OLURSA ##################
+                iptalet = imagesearch("iptal.PNG", precision=0.6)
+                if iptalet[0] != -1:
+                    iptalet_x = iptalet[0]
+                    iptalet_y = iptalet[1]
+                    iptalet_x = iptalet_x+25
+                    iptalet_y = iptalet_y+15
+                    print("Oyuna Girerken Hata")
+                    pyautogui.moveTo(iptalet_x, iptalet_y, 0.2)
+                    time.sleep(0.1)
+                    pyautogui.leftClick(iptalet_x, iptalet_y)
+
+                ################ OYUNA GİRİŞ İÇİN ##################
+                karakter = imagesearch("Karakter.PNG", precision=0.6)
+                if not karakter[0] == -1:
+                    print("Karakter Ekranında, Oyuna Giriliyor...")
+                    keyboard.press("enter")
+                    time.sleep(0.2)
+                    keyboard.release("enter")
+                    time.sleep(12)
+                    keyboard.press("F6")
+                    time.sleep(0.2)
+                    keyboard.release("F6")
+                    time.sleep(0.5)
+                    keyboard.press("f")
+                    time.sleep(1)
+                    keyboard.release("f")
+                    ################ EK SEÇENEKLER İÇİN ##################
+                    """secenekler = imagesearch("secenekler.PNG")
+                    if secenekler[0] != -1:
+                        secenekler_x = secenekler[0]
+                        secenekler_y = secenekler[1]
+                        secenekler_x = secenekler_x+20
+                        secenekler_y = secenekler_y+5
+                        pyautogui.moveTo(secenekler_x, secenekler_y, 0.2)
+                        time.sleep(0.1)
+                        pyautogui.leftClick(secenekler_x, secenekler_y)
+                        time.sleep(1)
+                        keyboard.press("F8")
+                        time.sleep(0.2)
+                        keyboard.release("F8")
+                        time.sleep(0.2)
+                        keyboard.press("s")
+                        time.sleep(0.5)
+                        keyboard.release("s")"""
+
+                ################ OTOMATİK PET PENCERESİ AÇILIRSA DİYE ##################
+                """pet = imagesearch("pet.PNG")
+                if pet[0] != -1:
+                    pet_x = pet[0]
+                    pet_y = pet[1]
+                    pet_x = pet_x+70
+                    pet_y = pet_y+10
+                    pyautogui.moveTo(pet_x, pet_y, 0.2)
+                    # pyautogui.mouseDown(button='left')
+                    pyautogui.drag(-150, 0, 0.2, button ='left')
+                    # pyautogui.mouseUp(button='left')"""
+
+                biyalog = imagesearch("New21.PNG", precision=0.6)
+                if biyalog[0] != -1:
+                    print("Biyalog Açılmış, Kapanıyor...")
+                    pyautogui.moveTo(770, 181, 0.2)
+                    time.sleep(0.1)
+                    pyautogui.leftClick(770, 181)
+                    continue
+
+                kapama = imagesearch("Kapatma.PNG")
+                if kapama[0] != -1:
+                    print("Pencere Açılmış, Kapatılıyor...")
+                    time.sleep(1)
+                    kapama_x = kapama[0]
+                    kapama_y = kapama[1]
+                    kapama_x = kapama_x+5
+                    kapama_y = kapama_y+5
+                    pyautogui.moveTo(kapama_x, kapama_y, 0,2)
+                    time.sleep(1)
+                    pyautogui.leftClick(kapama_x, kapama_y)
+
+
+                ################ 1.METİNi KESMEK İÇİN ##################
+                metin5 = imagesearch("New7.PNG")
+                if metin5[0] != -1:
+                    print(metin5)
+                    metin5_x = metin5[0]
+                    metin5_y = metin5[1]
+                    metin5_x = metin5_x + 40
+                    metin5_y = metin5_y + 10
+                    print("1. Metin Bulundu")
+
+                    """if metin5_y > 725:
+                        pyautogui.moveTo(metin5_x, 720, 0.1)
+                        pyautogui.leftClick(metin5_x,720)
+                        time.sleep(2)"""
+
+                    if metin5[0] > 825:
+                        pyautogui.moveTo(metin5_x - 10, metin5_y + 5, 0.1)
+                        pyautogui.leftClick(metin5_x - 10, metin5_y + 5)
+                        time.sleep(3)
+
+                    if metin5[0] < 400:
+                        pyautogui.moveTo(metin5_x + 10, metin5_y + 5, 0.1)
+                        pyautogui.leftClick(metin5_x + 10, metin5_y + 5)
+                        time.sleep(3)
+
+                    if metin5_y < 240:
+                        pyautogui.moveTo(metin5_x, metin5_y + 10, 0.1)
+                        pyautogui.leftClick(metin5_x, metin5_y + 10)
+                        time.sleep(3)
+
+                    else:
+                        # pyautogui.moveTo(random.randrange(metin5_x, metin5_x+10),
+                        #                 random.randrange(metin5_y, metin5_y+5))
+                        pyautogui.moveTo(metin5_x, metin5_y, 0.1)
+                        pyautogui.leftClick(metin5_x, metin5_y)
+                        time.sleep(3)
+
+                ################ 1. METİN KONTROL İÇİN ##################
+                metin1 = imagesearch("New7.PNG")
+                ################ METİN AYNI YERDE Mİ? ##################
+                if metin5 == metin1:
+                    time.sleep(0.2)
+                    pyautogui.moveTo(random.randrange(100, 800),
+                                     random.randrange(300, 800))
+                    time.sleep(0.2)
+                    pyautogui.click()
+                    print("1. ve 2. Metin Aynı Yerde")
+                    time.sleep(2)
+                    continue
+                elif not metin5 == metin1:
+                    metin1_x = metin1[0]
+                    metin1_y = metin1[1]
+                    metin1_x = metin1_x + 40
+                    metin1_y = metin1_y + 10
+
+                    print("2. Metin Bulundu")
+                    """if metin1_y > 725:
+                        pyautogui.moveTo(metin1_x, 720, 0.1)
+                        pyautogui.leftClick(metin1_x, 720)
+                        time.sleep(2)
+                        continue"""
+
+                    if metin1[0] > 825:
+                        pyautogui.moveTo(metin1_x - 10, metin1_y + 5, 0.1)
+                        pyautogui.leftClick(metin1_x - 10, metin1_y + 5)
+                        time.sleep(2)
+                        continue
+
+                    if metin1[0] < 400:
+                        pyautogui.moveTo(metin1_x + 10, metin1_y + 5, 0.1)
+                        pyautogui.leftClick(metin1_x + 10, metin1_y + 5)
+                        time.sleep(2)
+                        continue
+
+                    if metin1_y < 340:
+                        pyautogui.moveTo(metin1_x, metin1_y + 10, 0.1)
+                        pyautogui.leftClick(metin1_x, metin1_y + 10)
+                        time.sleep(2)
+                        continue
+
+                    else:
+                        pyautogui.moveTo(metin1_x, metin1_y, 0.1)
+                        pyautogui.leftClick(metin1_x, metin1_y)
+                        time.sleep(2)
+                        continue
+
+                ################ VARSA 2.METİN SEÇENEĞİ İÇİN ##################
+                metin31 = imagesearch("GolgeMetini.PNG")
+                if metin31[0] != -1:
+                    print(metin31)
+                    metin31_x = metin31[0]
+                    metin31_y = metin31[1]
+                    metin31_x = metin31_x + 30
+                    metin31_y = metin31_y + 10
+                    print("Gölge Metini Bulundu")
+
+                    if metin31[0] > 825:
+                        pyautogui.moveTo(metin31_x - 10, metin31_y + 5, 0.1)
+                        pyautogui.leftClick(metin31_x - 10, metin31_y + 5)
+                        time.sleep(3)
+
+                    if metin31[0] < 400:
+                        pyautogui.moveTo(metin31_x + 10, metin31_y + 5, 0.1)
+                        pyautogui.leftClick(metin31_x + 10, metin31_y + 5)
+                        time.sleep(3)
+
+                    if metin31_y < 340:
+                        pyautogui.moveTo(metin31_x, metin31_y + 10, 0.1)
+                        pyautogui.leftClick(metin31_x, metin31_y + 10)
+                        time.sleep(3)
+
+                    else:
+                        pyautogui.moveTo(metin31_x, metin31_y, 0.1)
+                        pyautogui.leftClick(metin31_x, metin31_y)
+                        time.sleep(3)
+
+                ################ 2. METİN KONTROL ##################
+                metin11 = imagesearch("GolgeMetini.PNG")
+                ################ 2. METİNLER AYNI YERDE Mİ? ##################
+                if metin31 == metin11:
+                    time.sleep(0.2)
+                    pyautogui.moveTo(random.randrange(100, 800),
+                                     random.randrange(300, 1200))
+                    pyautogui.click()
+                    time.sleep(0.2)
+                    print("1. ve 2. Metin Aynı Yerde")
+                    time.sleep(2)
+                    continue
+                elif not metin31 == metin11:
+                    metin11_x = metin11[0]
+                    metin11_y = metin11[1]
+                    metin11_x = metin11_x + 30
+                    metin11_y = metin11_y + 10
+                    print("2. Gölge Metini Bulundu")
+
+                    if metin11[0] > 825:
+                        pyautogui.moveTo(metin11_x - 10, metin11_y + 5, 0.1)
+                        pyautogui.leftClick(metin11_x - 10, metin11_y + 5)
+                        time.sleep(2)
+                        continue
+
+                    if metin11[0] < 400:
+                        pyautogui.moveTo(metin11_x + 10, metin11_y + 5, 0.1)
+                        pyautogui.leftClick(metin11_x + 10, metin11_y + 5)
+                        time.sleep(2)
+                        continue
+
+                    if metin11_y < 340:
+                        pyautogui.moveTo(metin11_x, metin11_y + 10, 0.1)
+                        pyautogui.leftClick(metin11_x, metin11_y + 10)
+                        time.sleep(2)
+                        continue
+
+                    else:
+                        pyautogui.moveTo(metin11_x, metin11_y, 0.1)
+                        pyautogui.leftClick(metin11_x, metin11_y)
+                        time.sleep(2)
+                        continue
+
+            except:
+                print("Bir Sorun Oluştu.")
+
+
+
+q = tk.IntVar()
+q.set(0)
+x = tk.IntVar()
+x.set(0)
+y = tk.IntVar()
+y.set(0)
+z = tk.IntVar()
+z.set(0)
+a = tk.IntVar()
+a.set(0)
+b = tk.IntVar()
+b.set(0)
+c = tk.IntVar()
+c.set(0)
+d = tk.IntVar()
+d.set(0)
+e = tk.IntVar()
+e.set(0)
+
+
+check2 = tk.Checkbutton(pencere, text="Oto Metin Av", fg="black", activebackground="red", variable=z, onvalue=1, offvalue=0, command=OtoAv)
+check2.place(x=10, y=70)
+
+pencere.mainloop()
