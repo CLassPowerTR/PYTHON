@@ -1,0 +1,55 @@
+from __future__ import unicode_literals
+import youtube_dl
+from tkinter import *
+
+ydl_opts = {}
+def indir():
+    try:
+        if kutu.get:
+            with youtube_dl.YoutubeDL(ydl_opts) as ydl:
+                url = kutu.get()
+                ydl.download([url])
+
+                yazi = "{} \n ------------- \n"
+                metin_alani.tag_configure('style', foreground='green', font=('Arial', 10, 'bold'))
+                metin_alani.insert(END, yazi, 'style')
+
+        else:
+            yazi = 'LÜTFEN BOŞ ALANLARI DOLDURUNUZ...\n'
+            metin_alani.tag_configure('style', foreground='green', font=('Arial', 10, 'bold'))
+            metin_alani.insert(END, yazi, 'style')
+    except:
+        pass
+
+def Sil():
+    kutu.delete("1.0", "end")
+
+pencere=Tk()
+pencere.geometry("360x360")
+pencere.title("Youtube Mp4 İndir")
+
+
+kutu = Text(pencere, height=1, width=40)
+kutu.place(x=10, y=10)
+
+buton=Button(pencere)
+buton.config(text="İndir", bg="yellow", fg="black", height=1, width=10, command=indir)
+buton.place(x=170, y=30)
+
+buton1=Button(pencere)
+buton1.config(text="Sil", bg="yellow", fg="black", height=1, width=10, command=Sil)
+buton1.place(x=80, y=30)
+
+
+frame3 = Frame(pencere, bg='#5f9ea0')
+frame3.place(relx=0, rely=0.3, relwidth=1.0, relheight=0.7)
+Label(frame3, text='TERMINAL BİLGİ PANELİ', bg='#5f9ea0', fg='black', font='Arial 12 bold').pack(pady=10, anchor=S)
+
+metin_alani = Text(frame3, height=14, width=60, bg='#bfbfbf')
+metin_alani.tag_configure('style', foreground='#333', font=('Arial', 10, 'bold'))
+metin_alani.pack()
+bilgi = '>>>İNDİRME BİLGİLERİ... \n'
+metin_alani.insert(END, bilgi, 'style')
+
+
+mainloop()
