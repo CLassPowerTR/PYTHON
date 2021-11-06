@@ -8,18 +8,20 @@ def indir():
         if kutu.get:
             with youtube_dl.YoutubeDL(ydl_opts) as ydl:
                 url = kutu.get()
-                ydl.download([url])
-
-                yazi = "{} \n ------------- \n"
+                a = ydl.download([url])
+    
+                yazi = "{} \n ------------- \n".format(a)
                 metin_alani.tag_configure('style', foreground='green', font=('Arial', 10, 'bold'))
                 metin_alani.insert(END, yazi, 'style')
-
+    
         else:
             yazi = 'LÜTFEN BOŞ ALANLARI DOLDURUNUZ...\n'
             metin_alani.tag_configure('style', foreground='green', font=('Arial', 10, 'bold'))
             metin_alani.insert(END, yazi, 'style')
     except:
-        pass
+        yazi = 'BİR HATA İLE KARŞILAŞILDI, TEKRAR DENEYİNİZ...\n'
+        metin_alani.tag_configure('style', foreground='green', font=('Arial', 10, 'bold'))
+        metin_alani.insert(END, yazi, 'style')
 
 def Sil():
     kutu.delete("1.0", "end")
@@ -28,9 +30,9 @@ pencere=Tk()
 pencere.geometry("360x360")
 pencere.title("Youtube Mp4 İndir")
 
+kutu = Entry(pencere, width=60)
+kutu.place(x=30, y=10)
 
-kutu = Text(pencere, height=1, width=40)
-kutu.place(x=10, y=10)
 
 buton=Button(pencere)
 buton.config(text="İndir", bg="yellow", fg="black", height=1, width=10, command=indir)
@@ -50,6 +52,5 @@ metin_alani.tag_configure('style', foreground='#333', font=('Arial', 10, 'bold')
 metin_alani.pack()
 bilgi = '>>>İNDİRME BİLGİLERİ... \n'
 metin_alani.insert(END, bilgi, 'style')
-
 
 mainloop()
