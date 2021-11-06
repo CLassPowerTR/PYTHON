@@ -1,0 +1,184 @@
+# Koin İsimlerini İstediğiniz Koine Değiştirebilirsiniz
+# You Can Change Coin Names
+import time
+# import datetime as DT
+import pandas as pd
+from binance.client import Client
+# from binance.enums import *
+import numpy as np
+
+
+import logging
+# import telegram
+from telegram.ext import Updater  # CommandHandler, MessageHandler, Filters
+logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', level=logging.INFO)
+logger = logging.getLogger(__name__)
+token = "Your Telegram Bot Token"
+updater = Updater(token, use_context=True)
+
+#RSI
+def computeRSI(data, time_window):
+    diff = np.diff(data)
+    up_chg = 0 * diff
+    down_chg = 0 * diff
+
+    # up change 0'dan büyüktür, değilse 0'a eşittir
+    up_chg[diff > 0] = diff[diff > 0]
+
+    # down change 0'dan küçüktür, değilse 0'a eşittir
+    down_chg[diff < 0] = diff[diff < 0]
+
+    up_chg = pd.DataFrame(up_chg)
+    down_chg = pd.DataFrame(down_chg)
+
+    up_chg_avg = up_chg.ewm(com = time_window-1, min_periods = time_window).mean()
+    down_chg_avg = down_chg.ewm(com = time_window-1, min_periods = time_window).mean()
+
+    rs = abs(up_chg_avg / down_chg_avg)
+    rsi = 100-100 / (1+rs)
+    rsi = int(rsi[0].iloc[-1])
+    return rsi
+
+
+#MACD
+def MACD():
+    mumlar2 = client.get_klines(symbol = 'BTTTRY', interval=Client.KLINE_INTERVAL_30MINUTE, limit= '60')
+    closeVal = [float(entry[4]) for entry in mumlar2]
+    closeVal = pd.DataFrame(closeVal)
+    ema12 = closeVal.ewm(span = 12).mean()
+    ema26 = closeVal.ewm(span = 26).mean()
+    macd = ema26-ema12
+    signal = macd.ewm(span = 9).mean()
+
+    macd = macd.values.tolist()
+    signal = signal.values.tolist()
+
+    if macd[-1] > signal[-1] and macd[-2] < signal[-2]:
+        macdIndicator = 'SELL'
+    elif macd[-1] < signal[-1] and macd[-2] > signal[-2]:
+        macdIndicator = 'BUY'
+    else:
+        macdIndicator = 'HODL'
+
+    return macdIndicator
+###############################################################################
+
+api_key = 'Your Binance API key'
+api_secret = 'Your Binance API secret'
+client = Client(api_key, api_secret)
+kazanc = 1.01
+stop = 0.95
+
+print('__TARİH_____SAAT_____HODL__MİKTAR__RSİ__MACD____ANLIK-FİYATI____ALINAN-FİYAT_____SATILACAK-FİYAT________EMA-12______________KOMİSYON_____________STOP')
+while True:
+    try:
+        mumlar2 = client.get_klines(symbol = 'BTTTRY', interval=Client.KLINE_INTERVAL_30MINUTE, limit= '60')
+        closeVal = [float(entry[4]) for entry in mumlar2]
+        closeVal = pd.DataFrame(closeVal)
+
+        ema12 = closeVal.ewm(span = 12).mean()
+        ema12 = ema12.values.tolist()
+        ema12SonMum = ema12[-2]
+        ema12SondanBirMum = ema12[-3]
+
+        ema5 = closeVal.ewm(span = 5).mean()
+        ema5 = ema5.values.tolist()
+        ema5SonMum = ema5[-2]
+        ema5SondanBirMum = ema5[-3]
+
+        fiyat = client.get_ticker(symbol = 'BTTTRY')
+        sunucusaati = client.get_server_time()
+        sunucusaati = time.strftime('%m/%d/%Y %H:%M:%S',
+                                    time.gmtime(sunucusaati['serverTime'] / 1000.))
+        mumlar = client.get_klines(symbol = 'BTTTRY', interval = Client.KLINE_INTERVAL_30MINUTE)
+        mumlar2 = client.get_historical_klines("BTTTRY", Client.KLINE_INTERVAL_30MINUTE, "12 Mar, 2021")
+        kapanis = [float(entry[4]) for entry in mumlar]
+        kapanis_dizi = np.asarray(kapanis)
+        kapanis_bitis = kapanis_dizi[:-1]
+        rsi = computeRSI(kapanis_dizi, 14)
+        miktar = client.get_asset_balance(asset = 'BTT')
+        miktar = float(miktar['free'])
+        miktar1 = client.get_asset_balance(asset = 'TRY')
+        miktar1 = float(miktar1['free'])
+        koinfiyati = fiyat['lastPrice']
+        koinfiyati = koinfiyati
+        gunlukdegisimi = fiyat['priceChange']
+        gunlukyuzdesi = fiyat['priceChangePercent']
+        trades = client.get_my_trades(symbol = 'BTTTRY')
+        trades = trades[len(trades)-1]
+        alinanfiyat = float(trades['price'])
+        eldekiPara = float(trades['quoteQty'])
+        komisyon = trades['commission']
+        komisyonAlinanKoin = str(trades['commissionAsset'])
+        satilacakFiyat = float(alinanfiyat) * 1.003
+        satilacakFiyat = round(satilacakFiyat, 5)
+        sigNum = len(str(int(float(fiyat['askPrice']))))
+        sigNumOfCoin = '.'+str(len(str(int(float(fiyat['askPrice'])))))+'f'
+        stopfiyati = alinanfiyat * 0.97
+        stopfiyati = round(stopfiyati, 5)
+
+        if miktar > miktar1:
+            eldekikoin = 'BTT'
+        if miktar < miktar1:
+            eldekikoin = 'TRY'
+
+        if eldekikoin == 'BTT':
+            #SATMAK İÇİN ŞARTLAR
+            # 0.02295 < 0.02296 ve rsi > 80 ya da ema9
+            #  (float(koinfiyati) > float(alinanfiyat) * kazanc) and (rsi > 80 or ema5SonMum < ema5SondanBirMum)
+            if ema12SonMum < ema12SondanBirMum:
+                order = client.order_market_sell(
+                        symbol = 'BTTTRY',
+                        quantity = miktar)
+
+                eldekikoin = 'TRY'
+                alinanfiyat = koinfiyati
+
+                print(sunucusaati, "BTT SATIŞ: ", " ", "Miktarı: ", miktar, "Koin Fiyatı: ", float(koinfiyati))
+                prntInfo = sunucusaati + ' ' + 'BTT SATIŞ:' + ' ' + koinfiyati
+                updater.dispatcher.bot.send_message(chat_id="Your Telegram Chat ID", text=prntInfo)
+
+                # 0,02235 > 0,02234 ise stop ol
+            if float(stopfiyati) > float(koinfiyati):
+                order = client.order_market_sell(
+                    symbol = 'BTTTRY',
+                    quantity = miktar)
+
+                eldekikoin = 'TRY'
+                alinanfiyat = koinfiyati
+                # noinspection PyTypeChecker
+                print(sunucusaati, "BTT SATIŞ:", " ", "Miktarı: ", miktar, "Koin Fiyatı: ", float(koinfiyati))
+                # noinspection PyTypeChecker
+                prntInfo = sunucusaati + ' ' + 'STOP SATIŞ:' + ' ' + koinfiyati
+                updater.dispatcher.bot.send_message(chat_id = "Your Telegram Chat ID", text = prntInfo)
+
+            else:
+                print(sunucusaati, " ", eldekikoin, " ", miktar, " ", rsi, " ", MACD(), " ", koinfiyati, "    ", alinanfiyat, "         ", alinanfiyat*1.001, "         ", ema5SonMum, " ", komisyon, "-", komisyonAlinanKoin, stopfiyati)
+
+        if eldekikoin == 'TRY':
+            #ALMAK İÇİN ŞARTLAR
+            buy = miktar1 / float(koinfiyati)
+            buy = int(buy)
+            # 0.02195 > 0.02194
+            # float(koinfiyati) * kazanc < float(alinanfiyat) and (rsi < 20 or ema5SonMum > ema5SondanBirMum)
+            if ema12SonMum > ema12SondanBirMum:
+
+                order = client.order_market_buy(
+                    symbol = 'BTTTRY',
+                    quantity = buy)
+
+                eldekikoin = 'BTT'
+                alinanfiyat = koinfiyati
+                print(sunucusaati, "BTT ALIŞ", " ", "Miktarı: ", miktar1, " ", "Koin Fiyatı: ", float(koinfiyati))
+
+                prntInfo = sunucusaati + ' ' + 'BTT ALINDI:' + ' ' + koinfiyati
+                updater.dispatcher.bot.send_message(chat_id = "Your Telegram Chat ID", text = prntInfo)
+
+            else:
+                print(sunucusaati, " ", eldekikoin, " ", miktar1, " ", rsi, " ", MACD(), " ", koinfiyati, "    ", alinanfiyat, "     ", alinanfiyat/1.001, "       ", ema5SonMum, " ", komisyon, "-", komisyonAlinanKoin, stopfiyati)
+
+    except:
+        print(sunucusaati, " ", "Bir Hata Oluştu. Tekrar Bağlanılacaktır...")
+        #prntInfo = sunucusaati + ' ' + 'Bir Sorun Olustu. Tekrar Baglanilacaktir...'
+        updater.dispatcher.bot.send_message(chat_id = "Your Telegram Chat ID", text = prntInfo)
+    time.sleep(60)
