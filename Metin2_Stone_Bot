@@ -1,3 +1,10 @@
+#######################################
+#     EDİT BY BATU 06.11.2021         #
+#######################################
+# METİN_BOTU_Version 1.0.6            #
+#######################################
+
+
 import threading
 from tkinter import messagebox
 from python_imagesearch.imagesearch import imagesearch
