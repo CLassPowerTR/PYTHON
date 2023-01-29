@@ -1,8 +1,4 @@
-#######################################
-#     EDİT BY BATU 06.11.2021         #
-#######################################
-# METİN_BOTU_Version 1.0.6            #
-#######################################
+# METİN_BOTU_Version 1.0.6
 
 
 import threading
@@ -21,7 +17,7 @@ global secilenMetin
 pencere = tk.Tk()
 pencere.geometry("360x360")
 pencere.title("Metin Botu 'By Batu'")
-version = tk.Label(pencere, text="METİN_BOTU_Version 0.0.5")
+version = tk.Label(pencere, text="METİN_BOTU_Version 1.0.6")
 version.place(x=210, y=340)
 
 def OtoAv():
