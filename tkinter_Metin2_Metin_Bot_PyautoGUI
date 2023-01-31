@@ -23,14 +23,10 @@ global channels
 global g
 from tkinter import Tk,Menubutton
 
-
-
-
 pencere = tk.Tk()
 pencere.geometry("360x420")
-version = Label(pencere, text="xxxx yyy | METİN_BOTU_Version v4.1.1")
+version = Label(pencere, text="Batuhan Ergüven | METİN_BOTU_Version v4")
 version.pack(side=BOTTOM)
-
 
 menu = ttk.Notebook(pencere)
 otoGiris = ttk.Frame(menu)
@@ -352,7 +348,7 @@ def otomatikGiris():
                     if hesap != None:
                         pyautogui.write(kAdi, interval=0.1)
                         pyautogui.press('enter') 
-                        pyautogui.write("01012001sony", interval=0.1)
+                        pyautogui.write("", interval=0.1)
                         pyautogui.press('enter')
                         time.sleep(0.1)
                         keyboard.release("enter")
