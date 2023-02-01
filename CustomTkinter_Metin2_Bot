@@ -24,15 +24,15 @@ global channels
 global g
 from tkinter import Tk,Menubutton
 
+
 customtkinter.set_appearance_mode("dark")  # Modes: system (default), light, dark
 customtkinter.set_default_color_theme("blue")  # Themes: blue (default), dark-blue, green
 
 pencere = customtkinter.CTk()
 pencere.geometry("360x420")
-version = customtkinter.CTkLabel(pencere, text="Batuhan Ergüven | METİN_BOTU_Version v5",width=15,height=8,corner_radius=8)
+version = customtkinter.CTkLabel(pencere, text="xxx yyyy | METİN_BOTU_Version v5",width=15,height=8,corner_radius=8)
 pencere.title("Test")
 version.pack(side=BOTTOM)
-pencere.iconbitmap(r"C:\Users\90537\PycharmProjects\MetinBotu\RinaMt2Bot/icon.ico")
 
 
 menu = customtkinter.CTkTabview(master=pencere)
@@ -41,6 +41,8 @@ otoGiris = menu.add("Oto Giriş")
 otoMetin = menu.add("Oto Metin")
 otoTus = menu.add("Oto Tuş")
 etkinlik = menu.add("Etkinlik")
+ticaret = menu.add("Ticaret")
+
 
 labelWidth=12
 labelHeight=12
@@ -120,49 +122,10 @@ def chlerArasiFarm():
                         chlerArasiFarmBilgi6.configure(text = "Görüntü Yok")
                         time.sleep(2)
                 
-                """
-                # GÖRÜNTÜ İŞLEME İLE CHLER ARASI FARM
-                ayarlarAc = pyautogui.locateOnScreen("ayarlar.PNG", confidence=0.8)
-                print("ayarlarAc = ")
-                if ayarlarAc !=None:
-                    pyautogui.moveTo(ayarlarAc[0]+(ayarlarAc[2]/2), ayarlarAc[1]+(ayarlarAc[3]/2))
-                    time.sleep(0.1)
-                    pyautogui.click()
-                    time.sleep(0.2)
-                kanalDegistir = pyautogui.locateOnScreen("kanalDegistir.PNG", confidence=0.8)
-                print("kanalDegistir")
-                if kanalDegistir != None:
-                        pyautogui.moveTo(kanalDegistir[0]+(kanalDegistir[2]/2), kanalDegistir[1]+(kanalDegistir[3]/2))
-                        time.sleep(0.1)
-                        pyautogui.click()
-                        time.sleep(0.2)
-                if kanalDegistir == None:
-                    keyboard.press("esc")
-                    time.sleep(0.1)
-                    keyboard.release("esc")
-                    time.sleep(1)
-                kanaliSec=pyautogui.locateOnScreen("kanalSec.PNG", confidence=0.5)
-                print("kanaliSec", girilecekKanal)
-                if kanaliSec != None:
-                    print("Kanali Seçiniz Bulundu")
-                    kanalSec = pyautogui.locateOnScreen(girilecekKanal, confidence=0.99,region=(kanaliSec[0],kanaliSec[1],kanaliSec[2],kanaliSec[3]))
-                    if kanalSec != None:
-                        print("Kanal Bulundu = ",girilecekKanal)
-                        pyautogui.moveTo(kanalSec[0]+(kanalSec[2]/2), kanalSec[1]+(kanalSec[3]/2))
-                        time.sleep(0.1)
-                        pyautogui.click()
-                        time.sleep(0.2)
-                degistir = pyautogui.locateOnScreen("degistir.PNG", confidence=0.8)
-                if degistir != None:
-                        pyautogui.moveTo(degistir[0]+(degistir[2]/2), degistir[1]+(degistir[3]/2))
-                        time.sleep(0.1)
-                        pyautogui.click()
-                        time.sleep(0.2)
-                keyboard.release("space")
-                """
-        elif otoTusButton4Baslat.get() == 0:
+        if otoTusButton4Baslat.get() == 0:
             chlerArasiFarmBilgi6.config(text = "Durduruldur")
-            otoFarm["text"] = "Deaktif"
+            chlerArasiFarmBilgi7.configure(text = "---")
+            chlerArasiFarmBilgi8.configure(text = "---")
     except:
         print("Hata")
 
@@ -233,9 +196,7 @@ def Pelerin1():
 def zamanlayici1():
     try:
         if o.get() ==1:
-            
             k=1
-            
             while k==1:
                 epoch = time.gmtime(time.time())
                 saat = epoch.tm_hour+3
@@ -252,7 +213,6 @@ def zamanlayici1():
                 kalanDakika = 2
                 kalanSaniye = 40
                 cikacakSaat.configure(text="{}:{}:{}".format(saat,dakika,saniye))
-                #cikacakSaat["text"] = "{}:{}:{}".format(saat,dakika,saniye)
                 x = epoch.tm_sec
                 g=1
                 while g==1:
@@ -262,8 +222,6 @@ def zamanlayici1():
                         saat1=saat1-24
                     kalanSüre.configure(text="Kalan Süre: 00:0{}:{}".format(kalanDakika,kalanSaniye))
                     metinZamanlayici.configure(text="{}:{}:{}".format(saat1,epoch.tm_min,epoch.tm_sec))
-                    #kalanSüre["text"] = "Kalan Süre: 00:0{}:{}".format(kalanDakika,kalanSaniye)
-                    #metinZamanlayici["text"] = "{}:{}:{}".format(saat1,epoch.tm_min,epoch.tm_sec)
                     if x != epoch.tm_sec:
                         if kalanSaniye==0:
                             kalanDakika = kalanDakika-1
@@ -271,7 +229,6 @@ def zamanlayici1():
                         kalanSaniye=kalanSaniye-1
                     if o.get() ==0:
                         metinZamanlayici.configure(text="Durdu")
-                        #metinZamanlayici["text"] = "Durdu"
                         g=0
                         k=0
                     if epoch.tm_min==dakika and epoch.tm_sec==saniye:
@@ -327,6 +284,7 @@ def otomatikGiris():
     try:
         if oG.get() == 1:
             kAdi = otoGirisEntryValue.get()
+            sifre = otoGirisEntryValue1.get()
             bilgi1.configure(text="Başladı")
             while oG.get() == 1:
                 try:
@@ -363,10 +321,10 @@ def otomatikGiris():
                     hesap = pyautogui.locateOnScreen("hesap.PNG", confidence=0.8)
                     if hesap != None:
                         bilgi1.configure(text="K.Adi Giriliyor")
-                        pyautogui.write(kAdi, interval=0.1)
+                        pyautogui.write(kAdi, interval=0.05)
                         pyautogui.press('enter')
                         bilgi1.configure(text="Şifre Giriliyor")
-                        pyautogui.write("", interval=0.1)
+                        pyautogui.write(sifre, interval=0.05)
                         bilgi1.configure(text="Hesaba Giriliyor")
                         pyautogui.press('enter')
                         time.sleep(0.1)
@@ -422,7 +380,6 @@ def yenidenBasla():
 
 
 def botKontrol():
-    # HAZIRLIK AŞAMASI
     try:
         if t.get() == 1:
             while t.get() == 1:
@@ -433,9 +390,7 @@ def botKontrol():
                     dosya_adi = f"ekran_goruntusu.jpg"
                     ekran_goruntusu.save(dosya_adi)
 
-                    # Pytesseract yolumuzu belirtiyoruz
                     pytesseract.pytesseract.tesseract_cmd = "C:\\Program Files (x86)\\Tesseract-OCR\\tesseract.exe"
-                    # C:\\Users\\tunah\\PycharmProjects\\MetinBotu\\
 
                     custom_config = r'-c tessedit_char_whitelist=0123456789 --psm 6'  # Sadece beyaz listedekileri çıkar
                     sonuc = pytesseract.image_to_string(Image.open('EnTemizResimCaptcha1.png'), config=custom_config)
@@ -520,7 +475,7 @@ def Captcha():
 
     # Pytesseract yolumuzu belirtiyoruz
     pytesseract.pytesseract.tesseract_cmd="C:\\Program Files (x86)\\Tesseract-OCR\\tesseract.exe"
-    # C:\\Users\\tunah\\PycharmProjects\\MetinBotu\\
+    # C:\\Users\\UsersName\\PycharmProjects\\ProjectName\\
 
 
     def metinOku(resim_yolu):
@@ -533,7 +488,6 @@ def Captcha():
         kernel=np.ones((1,1),np.uint8)
         image=cv2.erode(image,kernel,iterations=1)
         image=cv2.dilate(image,kernel,iterations=1)
-
 
 
         #Resmimizde ki gri tonları siyah yapıyoruz
@@ -1028,52 +982,10 @@ a.grid(row=11,column=7)
 a = customtkinter.CTkLabel(etkinlik, text="-----",width=labelWidth,height=labelHeight,text_color="#000000")
 a.grid(row=6,column=6)
 
-"""
-epoch = time.gmtime(time.time())
-saat = epoch.tm_hour+3
-dakika = epoch.tm_min
-saniye = epoch.tm_sec
-gunler=[(0,"Pazartesi"),(1,"Salı"),(2,"Çarşamba"),(3,"Perşembe"),(4,"Cuma"),(5,"Cumartesi"),(6,"Pazar")]
-gun = epoch.tm_wday
-if saniye>=60:
-    dakika = dakika +1
-    saniye = saniye-60
-if dakika>=60:
-    saat=saat+1
-    dakika=dakika-60
-if saat>=24:
-    saat=saat-24
-for a,b in gunler:
-    if int(gun)==int(a):
-        gunlerden = b
-        break
-saatLabel = Label(etkinlik, text= "{} = {}:{}:{}".format(gunlerden,saat,dakika,saniye))
-saatLabel.place(x=200,y=300)
-"""
-"""
-while True:
-    epoch = time.gmtime(time.time())
-    saat = epoch.tm_hour+3
-    dakika = epoch.tm_min
-    saniye = epoch.tm_sec
-    gun = epoch.tm_mday
-    if saniye>=60:
-        dakika = dakika +1
-        saniye = saniye-60
-    if dakika>=60:
-        saat=saat+1
-        dakika=dakika-60
-    if saat>=24:
-        saat=saat-24
-    saatLabel["text"] = "{} = {}:{}:{}".format(gun,saat,dakika,saniye)
-    time.sleep(0.2)
-"""
-
 
 def pencereyiKapat():
     g=0
     pencere.quit()
-
 def etkinlikSaati():
     noelEtkinligiUyari = customtkinter.CTkLabel(pencere, text= "",width=labelWidth,height=labelHeight,text_color="#000000",corner_radius=8)
     noelEtkinligiUyari.place(x=125, y=350)
@@ -1333,12 +1245,8 @@ def etkinlikSaati():
         print("Hata")
         
 
-    
-    
 t10 = threading.Thread(target=etkinlikSaati)
 t10.start()
-
 ########################################################################################################
-
 pencere.resizable(width = False, height = False)
 pencere.mainloop()
