@@ -1,6 +1,3 @@
-# METİN_BOTU_Version 1.0.6
-
-
 import threading
 from tkinter import messagebox
 from python_imagesearch.imagesearch import imagesearch
@@ -16,7 +13,7 @@ global secilenMetin
 
 pencere = tk.Tk()
 pencere.geometry("360x360")
-pencere.title("Metin Botu 'By Batu'")
+pencere.title("Metin Botu")
 version = tk.Label(pencere, text="METİN_BOTU_Version 1.0.6")
 version.place(x=210, y=340)
 
