@@ -25,7 +25,7 @@ from tkinter import Tk,Menubutton
 
 pencere = tk.Tk()
 pencere.geometry("360x420")
-version = Label(pencere, text="Batuhan Ergüven | METİN_BOTU_Version v4")
+version = Label(pencere, text="xxxx yyyy | METİN_BOTU_Version v4")
 version.pack(side=BOTTOM)
 
 menu = ttk.Notebook(pencere)
@@ -105,49 +105,8 @@ def chlerArasiFarm():
                         chlerArasiFarmBilgi6.config(text = "Görüntü Yok")
                         time.sleep(2)
                 
-                """
-                # GÖRÜNTÜ İŞLEME İLE CHLER ARASI FARM
-                ayarlarAc = pyautogui.locateOnScreen("ayarlar.PNG", confidence=0.8)
-                print("ayarlarAc = ")
-                if ayarlarAc !=None:
-                    pyautogui.moveTo(ayarlarAc[0]+(ayarlarAc[2]/2), ayarlarAc[1]+(ayarlarAc[3]/2))
-                    time.sleep(0.1)
-                    pyautogui.click()
-                    time.sleep(0.2)
-                kanalDegistir = pyautogui.locateOnScreen("kanalDegistir.PNG", confidence=0.8)
-                print("kanalDegistir")
-                if kanalDegistir != None:
-                        pyautogui.moveTo(kanalDegistir[0]+(kanalDegistir[2]/2), kanalDegistir[1]+(kanalDegistir[3]/2))
-                        time.sleep(0.1)
-                        pyautogui.click()
-                        time.sleep(0.2)
-                if kanalDegistir == None:
-                    keyboard.press("esc")
-                    time.sleep(0.1)
-                    keyboard.release("esc")
-                    time.sleep(1)
-                kanaliSec=pyautogui.locateOnScreen("kanalSec.PNG", confidence=0.5)
-                print("kanaliSec", girilecekKanal)
-                if kanaliSec != None:
-                    print("Kanali Seçiniz Bulundu")
-                    kanalSec = pyautogui.locateOnScreen(girilecekKanal, confidence=0.99,region=(kanaliSec[0],kanaliSec[1],kanaliSec[2],kanaliSec[3]))
-                    if kanalSec != None:
-                        print("Kanal Bulundu = ",girilecekKanal)
-                        pyautogui.moveTo(kanalSec[0]+(kanalSec[2]/2), kanalSec[1]+(kanalSec[3]/2))
-                        time.sleep(0.1)
-                        pyautogui.click()
-                        time.sleep(0.2)
-                degistir = pyautogui.locateOnScreen("degistir.PNG", confidence=0.8)
-                if degistir != None:
-                        pyautogui.moveTo(degistir[0]+(degistir[2]/2), degistir[1]+(degistir[3]/2))
-                        time.sleep(0.1)
-                        pyautogui.click()
-                        time.sleep(0.2)
-                keyboard.release("space")
-                """
         elif otoTusButton4Baslat.get() == 0:
             chlerArasiFarmBilgi6.config(text = "Durduruldur")
-            otoFarm["text"] = "Deaktif"
     except:
         print("Hata")
 
@@ -406,7 +365,6 @@ def yenidenBasla():
 
 
 def botKontrol():
-    # HAZIRLIK AŞAMASI
     try:
         if t.get() == 1:
             while t.get() == 1:
@@ -992,47 +950,6 @@ a = ttk.Label(etkinlik, text="-----")
 a.grid(row=11,column=7)
 a = ttk.Label(etkinlik, text="-----")
 a.grid(row=6,column=6)
-
-"""
-epoch = time.gmtime(time.time())
-saat = epoch.tm_hour+3
-dakika = epoch.tm_min
-saniye = epoch.tm_sec
-gunler=[(0,"Pazartesi"),(1,"Salı"),(2,"Çarşamba"),(3,"Perşembe"),(4,"Cuma"),(5,"Cumartesi"),(6,"Pazar")]
-gun = epoch.tm_wday
-if saniye>=60:
-    dakika = dakika +1
-    saniye = saniye-60
-if dakika>=60:
-    saat=saat+1
-    dakika=dakika-60
-if saat>=24:
-    saat=saat-24
-for a,b in gunler:
-    if int(gun)==int(a):
-        gunlerden = b
-        break
-saatLabel = Label(etkinlik, text= "{} = {}:{}:{}".format(gunlerden,saat,dakika,saniye))
-saatLabel.place(x=200,y=300)
-"""
-"""
-while True:
-    epoch = time.gmtime(time.time())
-    saat = epoch.tm_hour+3
-    dakika = epoch.tm_min
-    saniye = epoch.tm_sec
-    gun = epoch.tm_mday
-    if saniye>=60:
-        dakika = dakika +1
-        saniye = saniye-60
-    if dakika>=60:
-        saat=saat+1
-        dakika=dakika-60
-    if saat>=24:
-        saat=saat-24
-    saatLabel["text"] = "{} = {}:{}:{}".format(gun,saat,dakika,saniye)
-    time.sleep(0.2)
-"""
 
 
 def pencereyiKapat():
