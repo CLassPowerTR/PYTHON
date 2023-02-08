@@ -2,7 +2,7 @@ import win32gui
 
 def get_child_windows(parent):
     '''
-    Get the handles of all child windows of the parent window
+    Ana pencerenin tüm alt pencerelerinin tutamaçlarını alın
     '''
     if not parent:
         return []
@@ -13,14 +13,14 @@ def get_child_windows(parent):
 
 def get_window_text(hwnd):
     '''
-    Get the text of the window with the given handle
+    Verilen tanıtıcı ile pencerenin metnini alın
     '''
     text = win32gui.GetWindowText(hwnd)
     return text
 
 def find_child_window_by_class_name(parent, class_name):
     '''
-    Find a child window of the parent window with the given class name
+    Verilen sınıf adına sahip ana pencerenin bir alt penceresini bulun
     '''
     if not parent:
         return None
@@ -36,21 +36,21 @@ def find_child_window_by_class_name(parent, class_name):
 
 def get_edit_control_handle(parent):
     '''
-    Get the handle of the edit control in the parent window
+    Ana pencerede düzenleme kontrolünün tutamacını alın
     '''
     edit_control_handle = find_child_window_by_class_name(parent, 'Edit')
     return edit_control_handle
 
 def get_status_bar_handle(parent):
     '''
-    Get the handle of the status bar in the parent window
+    Ana pencerede durum çubuğunun tutamacını alın
     '''
     status_bar_handle = find_child_window_by_class_name(parent, 'mscrls_statusbar32')
     return status_bar_handle
 
 def getWindowHandles(hwnd):
     '''
-    Get the handles of the Edit control and the status bar in the window with the given text
+    Verilen metnin bulunduğu pencerede Düzenleme denetiminin ve durum çubuğunun tutamaçlarını alın
     '''
     edit_control_handle = get_edit_control_handle(hwnd)
     status_bar_handle = get_status_bar_handle(hwnd)
