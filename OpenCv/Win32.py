@@ -104,3 +104,16 @@ def ImgBGcolorDetection(hwnd,RGB1,RGB2):
     resultral = cv2.bitwise_or(img,img,mask=result) 
     
     return resultral
+
+def imageArea(hwnd,x0,y0,x1,y1):
+    # 'CaptureWindows' fonksiyonu pencerenin ekran görüntüsünü yakalar.
+    img = img = CaptureWindows(hwnd)
+    # Yakalanan görüntüyü numpy dizisine dönüştürür.
+    img = np.array(img)
+    #  NumPy dizisi olarak dönüştürülen görüntünün boyutlarını (yükseklik, genişlik) döndürür.
+    w, h = img.shape[1], img.shape[0]
+    # Yakalanan görüntüyü BGR (Blue, Green, Red) formattan RGB (Red, Green, Blue) formata dönüştürür.
+    img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+    # Yakalanan görüntünün belirli bir kısmını (y0 ile y1 arasındaki satırlar ve x0 ile x1 arasındaki sütunlar) seçerek döndürür.
+    img = img[y0:y1,x0:x1]
+    return img
