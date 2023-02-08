@@ -41,6 +41,13 @@ def get_edit_control_handle(parent):
     edit_control_handle = find_child_window_by_class_name(parent, 'Edit')
     return edit_control_handle
 
+def get_render_window_handle(parent):
+    '''
+    Ana pencerede RenderWindow'un tanıtıcısını alın
+    '''
+    render_window_handle = find_child_window_by_class_name(parent, 'RenderWindow')
+    return render_window_handle
+
 def get_status_bar_handle(parent):
     '''
     Ana pencerede durum çubuğunun tutamacını alın
@@ -52,9 +59,7 @@ def getWindowHandles(hwnd):
     '''
     Verilen metnin bulunduğu pencerede Düzenleme denetiminin ve durum çubuğunun tutamaçlarını alın
     '''
-    edit_control_handle = get_edit_control_handle(hwnd)
-    status_bar_handle = get_status_bar_handle(hwnd)
-    return {'Edit': edit_control_handle, 'mscrls_statusbar32': status_bar_handle}
+    return {'Edit': get_edit_control_handle(hwnd), 'mscrls_statusbar32': get_status_bar_handle(hwnd), 'RenderWindow': get_render_window_handle(hwnd)}
     
 def listWindowNames():
     def winEnumHandler(hwnd, ctx):
