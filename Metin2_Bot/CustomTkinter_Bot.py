@@ -25,9 +25,6 @@ global g
 from tkinter import Tk,Menubutton
 
 
-# users/90537/pycharmprojects/metinbotu/rinamt2bot
-
-
 customtkinter.set_appearance_mode("dark")  # Modes: system (default), light, dark
 customtkinter.set_default_color_theme("blue")  # Themes: blue (default), dark-blue, green
 
@@ -44,8 +41,6 @@ otoGiris = menu.add("Oto Giriş")
 otoMetin = menu.add("Oto Metin")
 otoTus = menu.add("Oto Tuş")
 etkinlik = menu.add("Etkinlik")
-ticaret = menu.add("Ticaret")
-
 
 labelWidth=12
 labelHeight=12
@@ -387,7 +382,6 @@ def yenidenBasla():
 
 
 def botKontrol():
-    # HAZIRLIK AŞAMASI
     try:
         if t.get() == 1:
             while t.get() == 1:
@@ -1255,30 +1249,6 @@ def etkinlikSaati():
                 break
     except:
         print("Hata")
-
-##################################################################################################################
-#                                             TİCARET                                                            #
-##################################################################################################################
-karakter = StringVar(pencere)
-karakter.set("Karakter")
-karakterler = ["Savaşcı","Ninja","Sura","Şaman"]
-etkinlikMenu = customtkinter.CTkOptionMenu(master=ticaret, values=karakterler, variable=karakter, corner_radius=optionMenuCornerRadius,text_color="#bababa",button_color="#56aaff",button_hover_color="#666666").grid(row=0,column=0)
-nesne = StringVar(pencere)
-nesne.set("Nesneler")
-nesneler = ["Hepsi","Silahlar","Ekipman","Kostümler"]
-etkinlikMenu1 = customtkinter.CTkOptionMenu(master=ticaret, values=nesneler, variable=nesne, corner_radius=optionMenuCornerRadius,text_color="#bababa",button_color="#56aaff",button_hover_color="#666666").grid(row=0,column=1)
-tekCift = StringVar(pencere)
-ticaretLabel= customtkinter.CTkLabel(master=ticaret, text="İtem İsmi =",corner_radius=labelCornerRadius,text_color="#bababa")
-ticaretLabel.place(relx=0.005, rely=0.1)
-ticaretEntryValue = StringVar()
-ticaretEntry = customtkinter.CTkEntry(master=ticaret,placeholder_text="İtem Adı", textvariable = ticaretEntryValue, corner_radius=entryCornerRadius,text_color="#bababa",width=150)
-ticaretEntry.place(relx=0.3, rely=0.1)
-ticaretLabel1= customtkinter.CTkLabel(master=ticaret, text="CHAT BAĞIRMA | MESAJINIZI YAZINIZ",corner_radius=labelCornerRadius,text_color="#bababa")
-ticaretLabel1.place(relx=0.005, rely=0.2)
-ticaretEntryValue1 = StringVar()
-ticaretEntry1 = customtkinter.CTkEntry(master=ticaret,placeholder_text="Bagirma Mesaji Giriniz...", textvariable = ticaretEntryValue1, corner_radius=entryCornerRadius,text_color="#bababa",width=300)
-ticaretEntry1.place(relx=0.01, rely=0.3)
-
 
 
 ########################################################################################################
