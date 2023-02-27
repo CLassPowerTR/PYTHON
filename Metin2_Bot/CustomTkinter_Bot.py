@@ -30,7 +30,7 @@ customtkinter.set_default_color_theme("blue")  # Themes: blue (default), dark-bl
 
 pencere = customtkinter.CTk()
 pencere.geometry("360x420")
-version = customtkinter.CTkLabel(pencere, text="CLassPowerTR | METİN_BOTU_Version v5",width=15,height=8,corner_radius=8)
+version = customtkinter.CTkLabel(pencere, text="CLassPowerTR | METİN_BOTU_Version v1.0.0",width=15,height=8,corner_radius=8)
 pencere.title("RinaMt2 Bot")
 version.pack(side=BOTTOM)
 
