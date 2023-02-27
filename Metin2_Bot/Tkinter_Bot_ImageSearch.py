@@ -14,7 +14,7 @@ global secilenMetin
 pencere = tk.Tk()
 pencere.geometry("360x360")
 pencere.title("Metin Botu")
-version = tk.Label(pencere, text="METİN_BOTU_Version 1.0.6")
+version = tk.Label(pencere, text="METİN_BOTU_Version v0.1.6")
 version.place(x=210, y=340)
 
 def OtoAv():
