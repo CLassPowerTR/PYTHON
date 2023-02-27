@@ -1,4 +1,4 @@
-import threading
+9import threading
 from tkinter import messagebox
 from python_imagesearch.imagesearch import imagesearch
 import pyautogui
@@ -25,7 +25,7 @@ from tkinter import Tk,Menubutton
 
 pencere = tk.Tk()
 pencere.geometry("360x420")
-version = Label(pencere, text="xxxx yyyy | METİN_BOTU_Version v4")
+version = Label(pencere, text="xxxx yyyy | METİN_BOTU_Version v0.4.0")
 version.pack(side=BOTTOM)
 
 menu = ttk.Notebook(pencere)
